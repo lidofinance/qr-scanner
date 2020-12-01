@@ -1,0 +1,12 @@
+{
+  "name": "qr-scanner",
+  "version": "1.0.0",
+  "scripts": {
+    "updatelibs": "./updatelibs.sh",
+    "bundle": "./bundle.sh"
+  },
+  "devDependencies": {
+    "inline-scripts": "1.7.3"
+  },
+  "dependencies": {}
+}

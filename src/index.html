@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>QR Scanner</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="lib/adapter.min.js"></script>
+    <script type="text/javascript" src="lib/vue.min.js"></script>
+    <script type="text/javascript" src="lib/instascan.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="sidebar">
+        <section class="controls">
+          <button @click.stop="nextCode()" class="nextcode">Next Code</button>
+          <h2>{{ currentScanStats()}}</h2>
+        </section>
+        <section class="cameras">
+          <h2>Cameras</h2>
+          <div v-if="cameras.length === 0" class="empty">No cameras found</div>
+          <ul v-if="cameras.length > 0">
+            <li v-for="camera in cameras">
+              <span
+                v-if="camera.id == activeCameraId"
+                :title="formatName(camera.name)"
+                class="active"
+                >{{ formatName(camera.name) }}</span
+              >
+              <span
+                v-if="camera.id != activeCameraId"
+                :title="formatName(camera.name)"
+              >
+                <a @click.stop="selectCamera(camera)"
+                  >{{ formatName(camera.name) }}</a
+                >
+              </span>
+            </li>
+          </ul>
+        </section>
+        <section class="scans">
+          <h2>Scans</h2>
+          <div v-if="scans.length === 0" class="empty">No scans yet</div>
+          <transition-group name="scans" tag="div" class="itemlist">
+            <div v-for="scan in scans" :key="scan.date">
+              <div class="copy-download">
+                <button @click.stop="copy(scan.content)">Copy</button>
+                <button @click.stop="download(scan.content)">Download</button>
+              </div>
+              <accordion> {{ scan.content }} </accordion>
+              <div class="spacer" />
+            </div>
+          </transition-group>
+        </section>
+      </div>
+      <div class="preview-container">
+        <video id="preview"></video>
+      </div>
+    </div>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
