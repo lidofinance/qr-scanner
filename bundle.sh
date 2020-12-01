@@ -1,7 +1,7 @@
 #!/bin/bash
 
-rm -rf build/
-mkdir build
+rm -rf docs/
+mkdir docs
 
 mkdir -p temp
 cp -R src/ temp/
@@ -9,6 +9,6 @@ cp -R src/ temp/
 inline-script-tags temp/index.html temp/index.html
 inline-stylesheets temp/index.html temp/index.html
 
-cp temp/index.html build/
+cp temp/index.html docs/
 
 rm -rf temp/
