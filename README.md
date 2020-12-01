@@ -1,6 +1,6 @@
 # QR Scanner
 
-## Install inline-scripts
+## Install Dependency for Bundling
 
 ```shell
 npm i
