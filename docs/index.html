@@ -313,10 +313,18 @@ var app = new Vue({
       this.totalChunks = 0;
     },
     download: function (content) {
+      let filename = "message.json";
+      let json_content = JSON.parse(content);
+      if (json_content["DKGIdentifier"])  {
+        filename = "request.json";
+        if (json_content["ResultMsgs"]) {
+          filename = "response.json";
+        }
+      }
       var a = document.createElement("a");
       var file = new Blob([content], { type: "text/plain" });
       a.href = URL.createObjectURL(file);
-      a.download = "message.json";
+      a.download = filename;
       a.click();
     },
     copy: function (content) {
