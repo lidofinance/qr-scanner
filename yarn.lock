@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-inline-scripts@1.7.3:
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/inline-scripts/-/inline-scripts-1.7.3.tgz#3b2ee73c6577c98a24dea9dca7753e71673a7a4a"
-  integrity sha512-tL6NPmxY/6/1ccwoDk9AfpmKueAl/kamvO8zjTu5vtqiVT8jZ25U4ZNR69B7UOo2eHN/x1AofSh2kYSeZOaldw==
+"inline-scripts@^1.7.3":
+  "integrity" "sha512-tL6NPmxY/6/1ccwoDk9AfpmKueAl/kamvO8zjTu5vtqiVT8jZ25U4ZNR69B7UOo2eHN/x1AofSh2kYSeZOaldw=="
+  "resolved" "https://registry.npmjs.org/inline-scripts/-/inline-scripts-1.7.3.tgz"
+  "version" "1.7.3"

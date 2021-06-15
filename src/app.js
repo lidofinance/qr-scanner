@@ -23,6 +23,7 @@ var app = new Vue({
     activeCameraId: null,
     cameras: [],
     сhunks: {},
+    rawChunks: '',
     finished: false,
     totalChunks: 0,
     decodedChunks: 0,
@@ -31,6 +32,7 @@ var app = new Vue({
   mounted: function () {
     var self = this;
     self.chunks = {};
+    self.rawChunks = '';
     self.decodedChunks = 0;
     self.totalChunks = 0;
     self.scanner = new Instascan.Scanner({
@@ -60,13 +62,17 @@ var app = new Vue({
 
       if (self.decodedChunks === self.totalChunks) {
         self.finished = true;
-        data = "";
         for (var i = 0; i < self.totalChunks; ++i) {
-          data = data + window.atob(self.chunks[i]["Data"]);
+          self.rawChunks += window.atob(self.chunks[i]["Data"])
         }
-        b64Data = window.btoa(data);
-        self.scans.unshift({ date: +Date.now(), content: data });
-        //self.scans.unshift({ date: +(Date.now()), content: b64Data });
+        if (self.rawChunks) {
+          var charData = self.rawChunks.split('').map(function (x) {
+            return x.charCodeAt(0);
+          });
+          var binData = new Uint8Array(charData);
+          var originalData = pako.ungzip(binData, {to: "string"});
+          self.scans.unshift({date: +(Date.now()), content: originalData});
+        }
       }
     });
     Instascan.Camera.getCameras()
